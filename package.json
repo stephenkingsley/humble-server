@@ -1,0 +1,37 @@
+{
+  "name": "humble-server",
+  "version": "0.1.1",
+  "description": "nodejs framework that provide convenient, steady server.",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "DEV_MODE=development NODE_ENV=local node example/index.js",
+    "lint": "eslint ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephenkingsley/humble-server.git"
+  },
+  "keywords": [
+    "nodejs",
+    "server"
+  ],
+  "author": "stephen.K",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stephenkingsley/humble-server/issues"
+  },
+  "homepage": "https://github.com/stephenkingsley/humble-server#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.10.0",
+    "pre-commit": "^1.2.2"
+  },
+  "dependencies": {
+    "path-to-regexp": "^2.2.0"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}

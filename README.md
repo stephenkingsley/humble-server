@@ -1,6 +1,10 @@
 # humble-server
 nodejs framework that provide convenient, steady server.
 
+## Example
+ - [online](http://144.202.112.189:6969/hello)
+ - [project](https://github.com/stephenkingsley/humble-server-example)
+
 ## Installation
 humble-server requires node v8 or height and async function support.
 

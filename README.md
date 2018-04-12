@@ -50,6 +50,33 @@ In middleware, `next` function is important that can execute next middleware aut
 ## Config
 
 ## View
+View use [nunjucks](https://mozilla.github.io/nunjucks/). There is a api that name `render` can using in controller.
+
+```js
+// /controller/home.js
+async function home(context) {
+  const ret = await context.render('home.html', { title: 'Hello Humble-Server' });
+  return ret;
+}
+module.exports = home;
+```
+
+and html template such as
+
+```html
+<html>
+  <head>
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <h1>hello Humble-Server</h1>
+  </body>
+</html>
+```
+
+### context.render(template, data);
+ - template: the html file name, Humble will find this file in view folder.
+ - data: the data will pass to html template
 
 ## Develop
 This project provided an example, just run `npm run dev`!

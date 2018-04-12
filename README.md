@@ -25,10 +25,7 @@ humbleServerApp.start();
 
 ## Controler
 
-
 ## Router
-
-
 
 ## Middleware
 Humble is a middleware framework such as [Koa](https://github.com/koajs/koa) that use async function.
@@ -51,6 +48,8 @@ module.exports = log1;
 In middleware, `next` function is important that can execute next middleware automatically. So you can design your own logic in middleware.
 
 ## Config
+
+## View
 
 ## Develop
 This project provided an example, just run `npm run dev`!

@@ -1,5 +1,5 @@
 const HumbleServer = require('../src');
-const home = require('./controler/home');
+const home = require('./controller/home');
 
 const humbleServerApp = new HumbleServer({
   numCPUs: 1,

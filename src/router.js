@@ -19,7 +19,7 @@ class Router {
     const self = this;
     httpMethod.forEach(method => {
       self[method.toLocaleLowerCase()] =
-        (path, controler) => self.initRoute(path, controler, method.toLocaleLowerCase());
+        (path, controller) => self.initRoute(path, controller, method.toLocaleLowerCase());
     });
     this.router = [];
     this.dynamic = {
@@ -28,12 +28,12 @@ class Router {
     };
   }
 
-  initRoute(path, controler, method) {
+  initRoute(path, controller, method) {
     const re = pathToRegexp(path);
     this.router.push({
       re,
       path,
-      controler,
+      controller,
       method: method.toUpperCase(),
     });
   }
@@ -61,7 +61,7 @@ class Router {
     });
 
     if (isMatch && isMatch.length > 0) {
-      ret = await isMatch[0].controler(context);
+      ret = await isMatch[0].controller(context);
     } else if (context.router.dynamic.state) {
       let keys = [];
       const isMatchDynamic = context.router.dynamic.router.filter(route => {
@@ -75,9 +75,9 @@ class Router {
         }
       });
       if (isMatchDynamic && isMatchDynamic.length > 0) {
-        const controlerPath = getPath('controler');
-        const controler = require(path.join(controlerPath, `${keys[1]}.js`));
-        ret = await controler(context);
+        const controllerPath = getPath('controller');
+        const controller = require(path.join(controllerPath, `${keys[1]}.js`));
+        ret = await controller(context);
       } else {
         ret = 'can not match any router';
       }

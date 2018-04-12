@@ -38,7 +38,7 @@ module.exports = home;
 ```
 
 ## Router
-Now let look back on [Hello Humber](#hello-humber). Using `humbleServerApp.router` to register controller router.
+Now let look back on [Hello Humble](#hello-humble). Using `humbleServerApp.router` to register controller router.
 
 Route paths will be translated to regular expressions using [path-to-regexp](https://github.com/pillarjs/path-to-regexp).
 

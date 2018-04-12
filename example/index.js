@@ -6,7 +6,7 @@ const humbleServerApp = new HumbleServer({
   port: 6969,
 });
 
-humbleServerApp.router.get('/v1/api/:path', home);
+humbleServerApp.router.get('/home', home);
 humbleServerApp.router.dynamicRouter('get', '/v2/api/:path*');
 
 humbleServerApp.start();

@@ -1,5 +1,6 @@
 async function home(context) {
-  return `request: ${context.req.url} ---home`;
+  const ret = await context.render('home.html', {});
+  return ret;
 }
 
 module.exports = home;

@@ -3,14 +3,17 @@ const http = require('http');
 const { generateConfig, generateMiddleware } = require('./generateConfig');
 const composeMiddleware = require('./composeMiddleware');
 const Router = require('./router');
+const Render = require('./render');
 
 class HumbleServer {
   constructor(obj = {}) {
+    const render = new Render();
     this.router = new Router();
     this.config = generateConfig();
     this.middleware = generateMiddleware(this.config, this.router);
     this.numCPUs = obj.numCPUs || 1;
     this.port = obj.port || 6969;
+    this.render = render.render;
   }
 
   start() {
@@ -21,7 +24,7 @@ class HumbleServer {
         this.req = req;
         this.res = res;
         const ret = await this.fn(this).catch(err => err);
-        res.end(`hello world ${ret}`);
+        res.end(ret);
       }).listen(this.port, () => this.callback());
       console.log(`Worker ${process.pid} started and http started in port ${this.port}`);
     }

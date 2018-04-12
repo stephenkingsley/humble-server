@@ -38,7 +38,7 @@ module.exports = home;
 ```
 
 ## Router
-Now let look back on [Hello Humber](#Hello-Humber). Using `humbleServerApp.router` to register controller router.
+Now let look back on [Hello Humber](#hello-humber). Using `humbleServerApp.router` to register controller router.
 
 Route paths will be translated to regular expressions using [path-to-regexp](https://github.com/pillarjs/path-to-regexp).
 
@@ -87,9 +87,13 @@ module.exports = log1;
 In middleware, `next` function is important that can execute next middleware automatically. So you can design your own logic in middleware.
 
 ## Config
-Config will according to your NODE_ENV to require. But your have to has `config.default.js` file, this is the default config. 
+Config will according to your `NODE_ENV` to require. But your have to has `config.default.js` file, this is the default config. 
 
-Config file name: config.${NODE_ENV}.js
+Config file name: `config.${NODE_ENV}.js`
+
+    $ NODE_ENV=production node index.js
+
+Humble will loading config/config.default.js and `config/config.production.js`
 
 ### Middleware Config
 if you have some middleware to run with any http request, you should defined in config.

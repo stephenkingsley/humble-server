@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 
 const ENV = process.env.NODE_ENV;
 
@@ -54,8 +55,26 @@ function generateMiddleware(config, router) {
   return [].concat(middlewareConfig, router.dispatch);
 }
 
+function generatePlugin(plugin) {
+  const folderPath = getPath('plugin');
+  try {
+    const pluginArr = [];
+    const plugins = fs.readdirSync(folderPath);
+    for (let i = 0; i < plugins.length; i += 1) {
+      const pluginName = plugins[i].split('.')[0];
+      const PluginClass = require(path.join(folderPath, `${pluginName}.js`));
+      plugin[pluginName] = new PluginClass();
+    }
+    return pluginArr;
+  } catch (err) {
+    console.log('you are not use any plugins');
+    return [];
+  }
+}
+
 module.exports = {
   generateConfig,
   generateMiddleware,
+  generatePlugin,
   getPath,
 };

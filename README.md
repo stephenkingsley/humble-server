@@ -64,7 +64,7 @@ In this api, Humble will find the controller according to your path.
 humbleServerApp.router.dynamicRouter('get', '/v1/api/:path*');
 ```
 
-when `http.req.url` is `/v1/api/user/getUserInfo` that is match `/v1/api/:path`. [path-to-regexp](https://github.com/pillarjs/path-to-regexp) will return `user/getUserInfo` that is the `/:path*` value. And then Humble will execute `${your project dir}/controller/user/getUserInfo.js`.
+when `http.req.url` is `/v1/api/user/getUserInfo` that is match `/v1/api/:path`. [path-to-regexp](https://github.com/pillarjs/path-to-regexp) will return `user/getUserInfo` that is the value of `/:path*`. And then Humble will execute `${your project dir}/controller/user/getUserInfo.js`.
 
 ## Middleware
 Humble is a middleware framework such as [Koa](https://github.com/koajs/koa) that use async function.
@@ -83,11 +83,37 @@ async function log1(context, next) {
 module.exports = log1;
 ```
 
+## Plugin
+Plugin is another elegance architecture. Create your own plugins in `/plugin` folder without any config. In the controller you can run `context.plugin[${your plugin file name}]`.
+
+```js
+// controller
+async function home(context) {
+  context.plugin.log.info('--- hello ---');
+  return 'hello';
+}
+
+module.exports = home;
+```
+
+The rule of plugin is the plugin must be class.
+
+```js
+// plugin log
+class Log {
+  info(str) {
+    console.log(str);
+  }
+}
+
+module.exports = Log;
+```
+
 ### Next
 In middleware, `next` function is important that can execute next middleware automatically. So you can design your own logic in middleware.
 
 ## Config
-Config will according to your `NODE_ENV` to require. But your have to has `config.default.js` file, this is the default config. 
+Config will according to your `NODE_ENV` to require. But you have to has `config.default.js` file, this is the default config. 
 
 Config file name: `config.${NODE_ENV}.js`
 

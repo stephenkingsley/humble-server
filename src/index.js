@@ -1,6 +1,6 @@
 const cluster = require('cluster');
 const http = require('http');
-const { generateConfig, generateMiddleware } = require('./generateConfig');
+const { generateConfig, generateMiddleware, generatePlugin } = require('./generateConfig');
 const composeMiddleware = require('./composeMiddleware');
 const Router = require('./router');
 const Render = require('./render');
@@ -11,9 +11,11 @@ class HumbleServer {
     this.router = new Router();
     this.config = generateConfig();
     this.middleware = generateMiddleware(this.config, this.router);
+    this.plugin = [];
     this.numCPUs = obj.numCPUs || 1;
     this.port = obj.port || 6969;
     this.render = render.render;
+    generatePlugin(this.plugin);
   }
 
   start() {

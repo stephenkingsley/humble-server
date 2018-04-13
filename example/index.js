@@ -10,4 +10,3 @@ humbleServerApp.router.get('/home', home);
 humbleServerApp.router.dynamicRouter('get', '/v2/api/:path*');
 
 humbleServerApp.start();
-

@@ -1,5 +1,5 @@
 # humble-server
-nodejs framework that provide convenient, steady server.
+nodejs framework that provide convenient, steady service.
 
 ## Example
  - [online](http://144.202.112.189:6969/home)
@@ -83,6 +83,9 @@ async function log1(context, next) {
 module.exports = log1;
 ```
 
+### Next
+In middleware, `next` function is important that can execute next middleware automatically. So you can design your own logic in middleware.
+
 ## Plugin
 Plugin is another elegance architecture. Create your own plugins in `/plugin` folder without any config. In the controller you can run `context.plugin[${your plugin file name}]`.
 
@@ -108,9 +111,6 @@ class Log {
 
 module.exports = Log;
 ```
-
-### Next
-In middleware, `next` function is important that can execute next middleware automatically. So you can design your own logic in middleware.
 
 ## Config
 Config will according to your `NODE_ENV` to require. But you have to has `config.default.js` file, this is the default config. 

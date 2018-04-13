@@ -15,15 +15,9 @@ function getPath(folder) {
 }
 
 function generateConfig() {
-  const DEVMODE = process.env.DEV_MODE;
-  let configFolderPath = 'config';
-  let projectPath = __dirname.split('/node_modules')[0];
-  if (DEVMODE === 'development') {
-    projectPath = path.dirname(__dirname);
-    configFolderPath = 'example/config';
-  }
-  const defaultFilePath = path.join(projectPath, configFolderPath, 'config.default.js');
-  const filePath = path.join(projectPath, configFolderPath, `config.${ENV}.js`);
+  const configFolderPath = getPath('config');
+  const defaultFilePath = path.join(configFolderPath, 'config.default.js');
+  const filePath = path.join(configFolderPath, `config.${ENV}.js`);
   try {
     const defaultConfig = require(defaultFilePath);
     const fileConfig = require(filePath);
@@ -37,17 +31,11 @@ function generateMiddleware(config, router) {
   if (!config) {
     return [router.dispatch];
   }
-  const DEVMODE = process.env.DEV_MODE;
-  let middlewareFolderPath = 'middleware';
-  let projectPath = __dirname.split('/node_modules')[0];
-  if (DEVMODE === 'development') {
-    projectPath = path.dirname(__dirname);
-    middlewareFolderPath = 'example/middleware';
-  }
+  const middlewareFolderPath = getPath('middleware');
   let middlewareConfig = [];
   if (config.middleware && Array.isArray(config.middleware) && config.middleware.length > 0) {
     middlewareConfig = config.middleware.map(middleware => {
-      const filePath = path.join(projectPath, middlewareFolderPath, `${middleware}.js`);
+      const filePath = path.join(middlewareFolderPath, `${middleware}.js`);
       const middlewareFunction = require(filePath);
       return middlewareFunction;
     });
